@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+
 export default function SupervisorsPage() {
   return (
     <div>
@@ -7,9 +9,9 @@ export default function SupervisorsPage() {
           <button className="bg-white border border-gray-300 px-4 py-2 rounded hover:bg-gray-50">
             Import CSV
           </button>
-          <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+          <Button>
             Add Supervisor
-          </button>
+          </Button>
         </div>
       </div>
       <div className="bg-white rounded shadow-sm">
