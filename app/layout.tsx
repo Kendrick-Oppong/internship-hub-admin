@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body className={`${bai_Jamjuree.className} antialiased`}>
-        {children}
+        <main>{children}</main>
       </body>
     </html>
   );
