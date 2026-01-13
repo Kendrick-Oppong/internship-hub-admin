@@ -6,7 +6,7 @@ export default function LoginPage() {
     <div className="flex min-h-screen w-full bg-white">
       {/* LEFT - Hero section */}
       <div className="hidden lg:flex lg:w-1/2 relative bg-slate-900 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-indigo-900 to-slate-900 opacity-90" />
+        <div className="absolute inset-0 bg-linear-to-br from-blue-900 via-indigo-900 to-slate-900 opacity-90" />
         <div className="relative z-10 w-full flex flex-col items-center justify-center p-12 text-center text-white">
           <div className="mb-8 rounded-full bg-white p-6 backdrop-blur">
             <Image
