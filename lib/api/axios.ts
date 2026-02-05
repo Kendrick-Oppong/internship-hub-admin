@@ -12,8 +12,7 @@ const handleApiError = (error: AxiosError<ApiErrorResponse>) => {
     if (typeof window !== "undefined") {
       const currentPath = window.location.pathname;
 
-      // Only redirect on admin routes
-      if (currentPath.startsWith("/admin")) {
+      if (currentPath.startsWith("/dashboard")) {
         window.location.href = "/auth/sign-in";
       }
     }
@@ -45,4 +44,3 @@ api.interceptors.response.use(
     return Promise.reject(error);
   },
 );
-
