@@ -4,7 +4,9 @@ import { cn } from "@/lib/utils";
 import { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader, RefreshCw } from "lucide-react";
+import { ArrowLeft, Loader, RefreshCw } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { toast } from "@/lib/providers/toaster";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -32,14 +34,15 @@ import {
   VerifyEmailValues,
 } from "@/lib/validations/forms/auth";
 import { useResendVerification, useVerifyEmail } from "@/lib/hooks/use-auth";
-import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 export function VerifyEmailForm() {
-  const { mutate: verify, isPending: isVerifying } = useVerifyEmail();
-  const { mutate: resend, isPending: isResending } = useResendVerification();
-
+  const router = useRouter();
   const searchParams = useSearchParams();
   const email = searchParams.get("email");
+
+  const { mutate: verify, isPending: isVerifying } = useVerifyEmail();
+  const { mutate: resend, isPending: isResending } = useResendVerification();
 
   const { control, handleSubmit, setValue } = useForm<VerifyEmailValues>({
     resolver: zodResolver(verifyEmailSchema),
@@ -55,14 +58,28 @@ export function VerifyEmailForm() {
     }
   }, [email, setValue]);
 
+  // Centralized email check
+  const ensureEmailExists = (): string | null => {
+    if (!email) {
+      toast.error("Email not found. Redirecting...");
+      router.push("/auth/forgot-password");
+      return null;
+    }
+    return email;
+  };
+
   const onVerify = (data: VerifyEmailValues) => {
-    verify(data);
+    const validEmail = ensureEmailExists();
+    if (!validEmail) return;
+
+    verify({ ...data, email: validEmail });
   };
 
   const onResend = () => {
-    if (email) {
-      resend({ email });
-    }
+    const validEmail = ensureEmailExists();
+    if (!validEmail) return;
+
+    resend({ email: validEmail });
   };
 
   return (
@@ -75,7 +92,9 @@ export function VerifyEmailForm() {
           <CardDescription className="text-base">
             Enter the 6-digit code sent to{" "}
             <span
-              className={`font-medium ${email ? "text-primary" : "text-foreground"}`}
+              className={`font-medium ${
+                email ? "text-primary" : "text-foreground"
+              }`}
             >
               {email || "your email"}
             </span>
@@ -92,7 +111,7 @@ export function VerifyEmailForm() {
                   const slotStyles = cn(
                     "size-14 text-lg border border-gray-400 rounded-md transition-colors",
                     fieldState.invalid &&
-                      "border-destructive ring-destructive text-destructive",
+                      "border-destructive ring-destructive text-destructive"
                   );
 
                   return (
@@ -109,7 +128,7 @@ export function VerifyEmailForm() {
                           disabled={isResending || !email || isVerifying}
                           className={cn(
                             "h-auto p-0 text-xs font-normal text-muted-foreground hover:text-indigo-600 transition-colors",
-                            isResending && "opacity-50",
+                            isResending && "opacity-50"
                           )}
                         >
                           {isResending ? (
@@ -126,7 +145,10 @@ export function VerifyEmailForm() {
                           maxLength={6}
                           id="code"
                           value={field.value}
-                          onChange={field.onChange}
+                          onChange={(value) => {
+                            const numericValue = value.replace(/\D/g, "");
+                            field.onChange(numericValue);
+                          }}
                           disabled={isVerifying}
                           aria-invalid={fieldState.invalid}
                         >
@@ -169,9 +191,21 @@ export function VerifyEmailForm() {
             </Button>
           </form>
         </CardContent>
-        <CardFooter className="flex flex-col gap-4 justify-center pt-2 pb-6">
+        <CardFooter className="flex flex-col gap-4 justify-center pt-2 pb-2">
           <div className="text-sm text-muted-foreground text-center">
             Didn&apos;t receive the code? Check your spam folder.
+          </div>
+          <div className="flex justify-center pt-2">
+            <Link
+              href="/auth/login"
+              className={cn(
+                "flex items-center text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors",
+                isVerifying && "pointer-events-none opacity-50"
+              )}
+            >
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to login
+            </Link>
           </div>
         </CardFooter>
       </Card>

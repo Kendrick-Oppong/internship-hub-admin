@@ -40,7 +40,7 @@ export function RegisterForm() {
       firstName: "",
       lastName: "",
       email: "",
-      password: "",
+      password: "Kok1@551",
     },
   });
 

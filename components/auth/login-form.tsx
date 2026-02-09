@@ -34,8 +34,8 @@ export function LoginForm() {
   const { control, handleSubmit } = useForm<LoginValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: "admin@ttu.edu.gh",
+      password: "StrongPassword123!",
     },
   });
 
