@@ -1,4 +1,5 @@
 import axios, { AxiosError } from "axios";
+import { API_BASE_URL } from "@/lib/constants/api-endpoints";
 
 interface ApiErrorResponse {
   error?: string;
@@ -13,7 +14,7 @@ const handleApiError = (error: AxiosError<ApiErrorResponse>) => {
       const currentPath = window.location.pathname;
 
       if (currentPath.startsWith("/dashboard")) {
-        window.location.href = "/auth/sign-in";
+        window.location.href = "/auth/login";
       }
     }
   }
@@ -25,11 +26,9 @@ const handleApiError = (error: AxiosError<ApiErrorResponse>) => {
   return Promise.reject(new Error(message));
 };
 
-const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
-
 // ✅ Create axios instance
 export const api = axios.create({
-  baseURL,
+  baseURL: API_BASE_URL,
   withCredentials: true,
 });
 
@@ -42,5 +41,5 @@ api.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  },
+  }
 );
