@@ -2,11 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  FileBarChart,
-  Settings,
-  LogOut,
-} from "lucide-react";
+import { FileBarChart, Settings, LogOut } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -21,8 +17,6 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { sideBarNavItems } from "@/lib/constants/navigation";
 
-
-
 export function Sidebar() {
   const pathname = usePathname();
 
@@ -36,8 +30,8 @@ export function Sidebar() {
             alt="Logo"
             width={40}
             height={40}
-            className=""
-          />{" "}
+            priority
+          />
         </div>
         TTU IMS
       </div>
