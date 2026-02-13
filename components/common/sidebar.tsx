@@ -3,8 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FileBarChart, Settings, LogOut } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,12 +11,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { sideBarNavItems } from "@/lib/constants/navigation";
+import { useAppSelector } from "@/lib/store/hooks";
+import { selectCurrentUser } from "@/lib/store/slices/auth-slice";
 
 export function Sidebar() {
   const pathname = usePathname();
+  const user = useAppSelector(selectCurrentUser);
+  const initials = `${user?.firstName?.[0] || ""}${user?.lastName?.[0] || ""}`;
 
   return (
     <aside className="flex h-screen w-64 flex-col bg-gradient-to-b from-slate-900 to-slate-950 text-white">
@@ -48,7 +51,7 @@ export function Sidebar() {
               href={item.href}
               className={cn(
                 "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-white/10 hover:text-white [&a]:last-of-type:mb-4",
-                isActive && "bg-primary hover:bg-primary/90 text-white",
+                isActive && "bg-primary hover:bg-primary/90 text-white"
               )}
             >
               <Icon className="h-4 w-4" />
@@ -68,7 +71,7 @@ export function Sidebar() {
             className={cn(
               "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-white/10 hover:text-white",
               pathname === "/dashboard/reports" &&
-                "bg-primary hover:bg-primary/90 text-white",
+                "bg-primary hover:bg-primary/90 text-white"
             )}
           >
             <FileBarChart className="h-4 w-4" />
@@ -88,7 +91,7 @@ export function Sidebar() {
               "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
               pathname === "/dashboard/settings"
                 ? "bg-primary hover:bg-primary/90 text-white"
-                : "text-slate-300 hover:bg-white/10 hover:text-white",
+                : "text-slate-300 hover:bg-white/10 hover:text-white"
             )}
           >
             <Settings className="h-4 w-4" />
@@ -106,17 +109,22 @@ export function Sidebar() {
               className="flex w-full items-center justify-between rounded-md px-2 py-2 transition-colors hover:bg-white/10"
             >
               <div className="text-left text-sm">
-                <p className="font-medium leading-none">Dr. K. Mensah</p>
-                <p className="text-xs text-slate-400">Administrator</p>
+                <p className="font-medium leading-none">
+                  {user?.firstName} {user?.lastName}
+                </p>
+                <p className="text-xs text-slate-400 mt-1">{user?.role}</p>
               </div>
 
-              <Button
-                variant="ghost"
-                size="icon-sm"
-                className="bg-primary text-white hover:bg-primary hover:text-white"
-              >
-                AD
-              </Button>
+              <Avatar className="h-8 w-8 border border-white shadow-md">
+                <AvatarImage
+                  src={user?.avatarUrl || "/placeholder.jpg"}
+                  alt="Profile"
+                  className="object-cover object-top"
+                />
+                <AvatarFallback className="bg-indigo-100 text-indigo-700 text-base font-medium">
+                  {initials}
+                </AvatarFallback>
+              </Avatar>
             </div>
           </DropdownMenuTrigger>
 
@@ -125,7 +133,7 @@ export function Sidebar() {
               Admin Account
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="cursor-pointer text-red-600">
+            <DropdownMenuItem variant="destructive" className="cursor-pointer text-red-600">
               <LogOut className="mr-2 h-4 w-4" />
               Logout
             </DropdownMenuItem>
