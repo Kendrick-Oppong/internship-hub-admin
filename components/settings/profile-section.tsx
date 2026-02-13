@@ -3,32 +3,13 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { AuthUser } from "@/types/auth";
-import {
-  CheckCircle2,
-  Mail,
-  Phone,
-  Building2,
-  Fingerprint,
-  Camera,
-  Shield,
-} from "lucide-react";
-
-const mockUser: AuthUser = {
-  id: "c280772f-76ca-476a-b59e-f45f506406c1",
-  email: "admin@ttu.edu.gh",
-  firstName: "System",
-  lastName: "Administrator",
-  role: "ADMIN",
-  avatarUrl:
-    "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // "https://github.com/shadcn.png"
-  isVerified: true,
-  isOnboarded: false,
-  shouldResetPassword: false,
-};
+import { useAppSelector } from "@/lib/store/hooks";
+import { selectCurrentUser } from "@/lib/store/slices/auth-slice";
+import { CheckCircle2, Mail, Camera, Shield } from "lucide-react";
 
 export function ProfileSection() {
-  const initials = `${mockUser.firstName?.[0] || ""}${mockUser.lastName?.[0] || ""}`;
+  const user = useAppSelector(selectCurrentUser);
+  const initials = `${user?.firstName?.[0] || ""}${user?.lastName?.[0] || ""}`;
 
   return (
     <div className="relative overflow-hidden">
@@ -43,7 +24,7 @@ export function ProfileSection() {
           <div className="relative">
             <Avatar className="h-24 w-24 border-4 border-white shadow-md">
               <AvatarImage
-                src={mockUser.avatarUrl || "/placeholder.jpg"}
+                src={user?.avatarUrl || "/placeholder.jpg"}
                 alt="Profile"
                 className="object-cover object-top"
               />
@@ -62,11 +43,11 @@ export function ProfileSection() {
 
           <div className="flex-1 text-center sm:text-left pt-2 sm:pt-0">
             <h3 className="text-2xl font-bold text-slate-900">
-              {mockUser.firstName} {mockUser.lastName}
+              {user?.firstName} {user?.lastName}
             </h3>
             <div className="flex items-center justify-center sm:justify-start gap-2 text-slate-500">
               <span className="text-sm font-medium">System Administrator</span>
-              {mockUser.isVerified && (
+              {user?.isVerified && (
                 <CheckCircle2 className="h-4 w-4 text-blue-500 fill-blue-50" />
               )}
             </div>
@@ -84,8 +65,8 @@ export function ProfileSection() {
               <Mail className="h-3.5 w-3.5" /> Email Address
             </Label>
             <div className="p-3 bg-slate-50 rounded-lg border border-slate-100 font-medium text-slate-900 flex items-center justify-between">
-              {mockUser.email}
-              {mockUser.isVerified && (
+              {user?.email}
+              {user?.isVerified && (
                 <div className="text-[10px] bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-semibold">
                   Verified
                 </div>
@@ -98,7 +79,7 @@ export function ProfileSection() {
               <Shield className="h-3.5 w-3.5" /> Role
             </Label>
             <div className="p-3 bg-slate-50 rounded-lg border border-slate-100 font-medium text-slate-900">
-              {mockUser.role}
+              {user?.role}
             </div>
           </div>
         </div>
