@@ -30,6 +30,8 @@ const handleApiError = (error: AxiosError<ApiErrorResponse>) => {
 export const api = axios.create({
   baseURL: API_BASE_URL,
   withCredentials: true,
+  xsrfCookieName: "XSRF-TOKEN",
+  xsrfHeaderName: "X-XSRF-TOKEN",
 });
 
 // ✅ Attach interceptor

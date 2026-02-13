@@ -1,16 +1,21 @@
+import { OverallProgress } from "@/components/dashboard/overall-progress";
+import { QuickActions } from "@/components/dashboard/quick-actions";
+import { RecentSupervisionLogs } from "@/components/dashboard/recent-logs";
 import { DashboardStats } from "@/components/dashboard/statistics";
+import { SupervisionProgress } from "@/components/dashboard/supervision-progress";
 
 export default function DashboardPage() {
   return (
-    <div>
-      <h1 className="text-lg font-bold mb-2">Overview</h1>
+    <div className="space-y-5">
+      <h1 className="text-lg font-semibold mb-2">Overview</h1>
       <DashboardStats />
-
-      <div className="bg-white p-6 rounded shadow-sm h-96">
-        <h3 className="text-lg font-bold mb-1">Supervision Progress</h3>
-        <div className="flex items-center justify-center h-full text-gray-400">
-          Chart Placeholder
-        </div>
+      <div className="flex gap-5">
+        <SupervisionProgress />
+        <QuickActions />
+      </div>
+      <div className="grid grid-cols-2 gap-5">
+        <OverallProgress />
+        <RecentSupervisionLogs />
       </div>
     </div>
   );

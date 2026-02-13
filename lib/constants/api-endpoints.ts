@@ -17,6 +17,11 @@ export const API_ENDPOINTS = {
       UPDATE_STATUS: (id: string | number) => `/auth/supervisor/${id}/status`,
     },
   },
+  PROFILE: {
+    GET_PROFILE: "/profile",
+    UPDATE_PROFILE: (id: string | number) => `/profile/admin/${id}`,
+    UPLOAD_PROFILE_PICTURE: "/profile/upload",
+  },
 } as const;
 
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
