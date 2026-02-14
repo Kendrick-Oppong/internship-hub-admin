@@ -7,19 +7,27 @@ const initialState: AuthState = {
   user: null,
   isAuthenticated: false,
   isLoading: true, // true until we check session
+  csrfToken: null,
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setCredentials: (state, action: PayloadAction<AuthUser>) => {
-      state.user = action.payload;
+    setCredentials: (
+      state,
+      action: PayloadAction<{ user: AuthUser; csrfToken?: string }>
+    ) => {
+      state.user = action.payload.user;
+      if (action.payload.csrfToken) {
+        state.csrfToken = action.payload.csrfToken;
+      }
       state.isAuthenticated = true;
       state.isLoading = false;
     },
     clearCredentials: (state) => {
       state.user = null;
+      state.csrfToken = null;
       state.isAuthenticated = false;
       state.isLoading = false;
     },

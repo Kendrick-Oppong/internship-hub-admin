@@ -14,4 +14,10 @@ export interface AuthState {
   user: AuthUser | null;
   isAuthenticated: boolean;
   isLoading: boolean;
+  csrfToken: string | null;
+}
+
+export interface LoginResponse {
+  csrfToken: string;
+  message: string;
 }
