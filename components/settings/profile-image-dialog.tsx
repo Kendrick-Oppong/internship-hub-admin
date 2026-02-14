@@ -67,17 +67,19 @@ export function ProfileImageDialog({ children }: Readonly<ProfileImageDialogProp
           />
         </div>
 
-        <DialogFooter>
+        <DialogFooter className="gap-4">
           <Button
             variant="outline"
             onClick={() => setOpen(false)}
             disabled={isPending}
+            className="flex-1 border border-gray-300"
           >
             Cancel
           </Button>
           <Button
             onClick={handleUpload}
             disabled={!fileList || fileList.length === 0 || isPending}
+            className="flex-1"
           >
             {isPending ? (
               <>
