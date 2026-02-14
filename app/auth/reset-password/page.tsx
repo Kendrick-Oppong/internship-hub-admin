@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { ResetPasswordForm } from "@/components/auth/reset-password-form";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Reset Password | InternshipHub",
@@ -7,5 +8,9 @@ export const metadata: Metadata = {
 };
 
 export default function ResetPasswordPage() {
-  return <ResetPasswordForm />;
+  return (
+    <Suspense fallback={null}>
+      <ResetPasswordForm />
+    </Suspense>
+  );
 }
