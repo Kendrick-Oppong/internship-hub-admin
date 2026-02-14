@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { KeyRound, ShieldCheck, Laptop, Globe, Shield } from "lucide-react";
 import { useState, useEffect } from "react";
 import { getDeviceInfo } from "@/lib/utils";
+import Link from "next/link";
 
 export function SecuritySection() {
   const [deviceInfo, setDeviceInfo] = useState({
@@ -36,20 +37,20 @@ export function SecuritySection() {
 
       <div className="space-y-4">
         {/* Password Row */}
-        <div className="flex items-center justify-between p-4 rounded-lg border border-slate-100 bg-slate-50/50 hover:bg-slate-50 hover:border-slate-200 transition-all">
+        {/* <div className="flex items-center justify-between p-4 rounded-lg border border-slate-100 bg-slate-50/50 hover:bg-slate-50 hover:border-slate-200 transition-all">
           <div className="flex gap-4 items-center">
             <div className="p-2.5 bg-white rounded-lg shadow-sm border border-slate-100 text-slate-500">
               <KeyRound className="h-5 w-5" />
             </div>
             <div>
               <div className="font-medium text-slate-900">Password</div>
-              <div className="text-sm text-slate-500">
-                Last changed 3 months ago
-              </div>
+              <div className="text-sm text-slate-500">Update password</div>
             </div>
           </div>
-          <Button size="sm">Change Password</Button>
-        </div>
+          <Button size="sm">
+            <Link href="/auth/forgot-password">Change Password</Link>
+          </Button>
+        </div> */}
 
         {/* 2FA Row */}
         <div className="flex items-center justify-between p-4 rounded-lg border border-slate-100 bg-slate-50/50 hover:bg-slate-50 hover:border-slate-200 transition-all">
