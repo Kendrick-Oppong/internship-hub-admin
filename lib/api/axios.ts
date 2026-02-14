@@ -1,5 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { API_BASE_URL } from "@/lib/constants/api-endpoints";
+import { getStore } from "@/lib/store/store";
 
 interface ApiErrorResponse {
   error?: string;
@@ -14,6 +15,7 @@ const handleApiError = (error: AxiosError<ApiErrorResponse>) => {
       const currentPath = window.location.pathname;
 
       if (currentPath.startsWith("/dashboard")) {
+        localStorage.removeItem("csrf_token");
         window.location.href = "/auth/login";
       }
     }
@@ -34,7 +36,24 @@ export const api = axios.create({
   xsrfHeaderName: "X-XSRF-TOKEN",
 });
 
-// ✅ Attach interceptor
+// ✅ Attach interceptor for Request (to add XSRF token)
+api.interceptors.request.use((config) => {
+  
+  const store = getStore();
+  const state = store?.getState();
+  const tokenFromStore = state?.auth?.csrfToken;
+
+  console.log(tokenFromStore);
+
+  if (tokenFromStore) {
+    config.headers["X-XSRF-TOKEN"] = tokenFromStore;
+    return config;
+  }
+
+  return config;
+});
+
+// ✅ Attach interceptor for Response
 api.interceptors.response.use(
   (response) => response,
   (error) => {
