@@ -6,6 +6,7 @@ import { useAppSelector } from "@/lib/store/hooks";
 import {
   selectIsAuthenticated,
   selectIsLoading,
+  selectCurrentUser,
 } from "@/lib/store/slices/auth-slice";
 
 /**
@@ -21,11 +22,30 @@ export function AuthGuard({
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const isLoading = useAppSelector(selectIsLoading);
 
+  const user = useAppSelector(selectCurrentUser);
+
   useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      router.replace(`/auth/login?callbackUrl=${encodeURIComponent(pathname)}`);
+    if (!isLoading) {
+      if (!isAuthenticated) {
+        // Not authenticated -> Login
+        router.replace(
+          `/auth/login?callbackUrl=${encodeURIComponent(pathname)}`
+        );
+      } else if (
+        user?.shouldResetPassword &&
+        pathname !== "/auth/change-password"
+      ) {
+        // Authenticated but must change password -> Change Password
+        router.replace("/auth/change-password");
+      } else if (
+        !user?.shouldResetPassword &&
+        pathname === "/auth/change-password"
+      ) {
+        // Authenticated and no need to change password -> Dashboard
+        router.replace("/dashboard");
+      }
     }
-  }, [isAuthenticated, isLoading, router, pathname]);
+  }, [isAuthenticated, isLoading, router, pathname, user]);
 
   // Show loading spinner while checking session status
   if (isLoading) {
