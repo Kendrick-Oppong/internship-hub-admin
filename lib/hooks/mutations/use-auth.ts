@@ -11,6 +11,7 @@ import {
   LoginValues,
   RegisterStudentValues,
   ResendVerificationValues,
+  ResetPasswordValues,
   VerifyEmailValues,
 } from "@/lib/validations/forms/auth";
 
@@ -108,6 +109,23 @@ export const useForgotPassword = () => {
     onError: (error) => {
       console.error("Forgot password error:", error);
       toast.error(error.message || "Failed to send reset link");
+    },
+  });
+};
+
+export const useResetPassword = () => {
+  const router = useRouter();
+
+  return useMutation({
+    mutationFn: (data: ResetPasswordValues) =>
+      authMutationsApi.resetPassword(data),
+    onSuccess: (data) => {
+      toast.success(data.message || "Password reset successfully");
+      router.push("/auth/login");
+    },
+    onError: (error) => {
+      console.error("Reset password error:", error);
+      toast.error(error.message || "Failed to reset password");
     },
   });
 };

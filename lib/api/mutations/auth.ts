@@ -5,6 +5,7 @@ import {
   LoginValues,
   RegisterStudentValues,
   ResendVerificationValues,
+  ResetPasswordValues,
   VerifyEmailValues,
 } from "@/lib/validations/forms/auth";
 import { LoginResponse } from "@/types/auth";
@@ -13,7 +14,7 @@ export const authMutationsApi = {
   login: async (data: LoginValues) => {
     const response = await api.post<LoginResponse>(
       API_ENDPOINTS.AUTH.LOGIN,
-      data,
+      data
     );
     return response.data;
   },
@@ -31,13 +32,18 @@ export const authMutationsApi = {
   resendVerification: async (data: ResendVerificationValues) => {
     const response = await api.post(
       API_ENDPOINTS.AUTH.RESEND_VERIFICATION,
-      data,
+      data
     );
     return response.data;
   },
 
   forgotPassword: async (data: ForgotPasswordValues) => {
     const response = await api.post(API_ENDPOINTS.AUTH.FORGOT_PASSWORD, data);
+    return response.data;
+  },
+
+  resetPassword: async (data: ResetPasswordValues) => {
+    const response = await api.post(API_ENDPOINTS.AUTH.RESET_PASSWORD, data);
     return response.data;
   },
 };
