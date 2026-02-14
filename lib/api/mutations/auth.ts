@@ -7,6 +7,7 @@ import {
   ResendVerificationValues,
   ResetPasswordValues,
   VerifyEmailValues,
+  ChangePasswordValues,
 } from "@/lib/validations/forms/auth";
 import { LoginResponse } from "@/types/auth";
 
@@ -43,7 +44,19 @@ export const authMutationsApi = {
   },
 
   resetPassword: async (data: ResetPasswordValues) => {
-    const response = await api.post(API_ENDPOINTS.AUTH.RESET_PASSWORD, data);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { confirmPassword, ...payload } = data;
+    const response = await api.post(API_ENDPOINTS.AUTH.RESET_PASSWORD, payload);
+    return response.data;
+  },
+
+  changePassword: async (data: ChangePasswordValues) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { confirmPassword, ...payload } = data;
+    const response = await api.post(
+      API_ENDPOINTS.AUTH.CHANGE_PASSWORD,
+      payload
+    );
     return response.data;
   },
 };

@@ -13,6 +13,7 @@ import {
   ResendVerificationValues,
   ResetPasswordValues,
   VerifyEmailValues,
+  ChangePasswordValues,
 } from "@/lib/validations/forms/auth";
 
 export const useLogin = () => {
@@ -126,6 +127,42 @@ export const useResetPassword = () => {
     onError: (error) => {
       console.error("Reset password error:", error);
       toast.error(error.message || "Failed to reset password");
+    },
+  });
+};
+
+export const useChangePassword = () => {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  return useMutation({
+    mutationFn: (data: ChangePasswordValues) =>
+      authMutationsApi.changePassword(data),
+    onSuccess: async (data) => {
+      toast.success(data.message || "Password changed successfully");
+
+      // Refresh session to update shouldResetPassword status
+      try {
+        const sessionResponse = await api.get(API_ENDPOINTS.AUTH.SESSION);
+        if (sessionResponse.data?.id) {
+          // Keep existing token
+          const csrfToken = localStorage.getItem("csrf_token") || undefined;
+          dispatch(
+            setCredentials({
+              user: sessionResponse.data,
+              csrfToken,
+            })
+          );
+        }
+      } catch (error) {
+        console.error("Failed to refresh session after password change", error);
+      }
+
+      router.push("/auth/login");
+    },
+    onError: (error) => {
+      console.error("Change password error:", error);
+      toast.error(error.message || "Failed to change password");
     },
   });
 };
