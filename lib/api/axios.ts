@@ -3,11 +3,6 @@ import { API_BASE_URL, API_ENDPOINTS } from "@/lib/constants/api-endpoints";
 import { getStore } from "@/lib/store/store";
 import { setCsrfToken, clearCredentials } from "@/lib/store/slices/auth-slice";
 
-interface ApiErrorResponse {
-  error?: string;
-  message?: string;
-}
-
 // Track refreshing state
 let isRefreshing = false;
 
@@ -56,9 +51,25 @@ api.interceptors.request.use((config) => {
 
 // ✅ Attach interceptor for Response
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    // Proactively check for csrfToken in any successful response
+    // This keeps the store in sync if the token rotates on any request (e.g. session check, login, or any other endpoint)
+    const { csrfToken } = response.data || {};
+
+    if (csrfToken) {
+      const store = getStore();
+      if (store) {
+        store.dispatch(setCsrfToken(csrfToken));
+      }
+      localStorage.setItem("csrf_token", csrfToken);
+    }
+
+    return response;
+  },
   async (error) => {
-    const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean };
+    const originalRequest = error.config as InternalAxiosRequestConfig & {
+      _retry?: boolean;
+    };
 
     if (!axios.isAxiosError(error) || !error.response) {
       return Promise.reject(error);
@@ -110,7 +121,10 @@ api.interceptors.response.use(
           return api(originalRequest);
         }
       } catch (refreshError) {
-        const errorToProcess = refreshError instanceof Error ? refreshError : new Error(String(refreshError));
+        const errorToProcess =
+          refreshError instanceof Error
+            ? refreshError
+            : new Error(String(refreshError));
         processQueue(errorToProcess, null);
 
         // Final fallback: Clear credentials and redirect

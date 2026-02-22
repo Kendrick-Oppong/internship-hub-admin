@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/lib/store/hooks";
 import {
   setCredentials,
@@ -15,28 +16,37 @@ import { API_ENDPOINTS } from "@/lib/constants/api-endpoints";
  */
 export function SessionInitializer() {
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   useEffect(() => {
     const checkSession = async () => {
       try {
         const response = await api.get(API_ENDPOINTS.AUTH.SESSION);
+        const userData = response.data;
 
+        // Retrieve CSRF token from localStorage (set during login or refresh)
         const csrfToken = localStorage.getItem("csrf_token") || undefined;
 
-        if (response.data?.id) {
-          dispatch(setCredentials({ user: response.data, csrfToken }));
+        if (userData?.id) {
+          dispatch(setCredentials({ user: userData, csrfToken }));
+
+          // Forced redirect logic
+          if (userData.shouldResetPassword) {
+            router.push("/auth/change-password");
+          }
         } else {
           localStorage.removeItem("csrf_token");
           dispatch(clearCredentials());
         }
-      } catch {
+      } catch (error) {
+        console.error("Session check failed:", error);
         localStorage.removeItem("csrf_token");
         dispatch(clearCredentials());
       }
     };
 
     checkSession();
-  }, [dispatch]);
+  }, [dispatch, router]);
 
   return null;
 }
