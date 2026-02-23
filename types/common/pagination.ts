@@ -7,6 +7,6 @@
 }
 
 export interface ApiPaginatedResponse<T> {
-  data: T[];
+  data: T;
   meta: PaginationMeta;
 }
