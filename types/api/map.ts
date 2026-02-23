@@ -11,6 +11,35 @@ export type ZoneData = {
   description?: string;
 };
 
+// API Response Types
+export type ZoneApiResponse = {
+  id: string;
+  name: string;
+  description?: string;
+  color: string;
+  polygonTransparency: number;
+  borderWidth: number;
+  boundary: {
+    type: "Polygon";
+    coordinates: [[number, number][]];
+  };
+  createdAt: string;
+};
+
+export type ZonesResponse = ZoneApiResponse[];
+
+// Request Types
+export type CreateZoneRequest = {
+  name: string;
+  color: string;
+  coordinates: [number, number][];
+  description?: string;
+  polygonTransparency: number;
+  borderWidth: number;
+};
+
+export type UpdateZoneRequest = CreateZoneRequest;
+
 export interface MapDrawingLayerProps {
   /** Whether drawing mode is active */
   isDrawActive: boolean;
@@ -31,6 +60,10 @@ export interface MapDrawingLayerProps {
     zoneId: string,
     coordinates: [number, number][]
   ) => void;
+  /** Whether a deletion is currently in progress */
+  isDeleting?: boolean;
+  /** Whether the last deletion was successful */
+  isDeleteSuccess?: boolean;
 }
 
 export interface ZonePropertiesPanelProps {
@@ -39,6 +72,12 @@ export interface ZonePropertiesPanelProps {
   onClose: () => void;
   /** Called when form values change, for live preview */
   onValuesChange?: (data: ZoneFormData) => void;
-  initialData?: Partial<ZoneFormData>;
+  initialData?: Partial<ZoneFormData & { id: string }>;
   isEditing?: boolean;
+  /** Whether a creation or update is currently in progress */
+  isSubmitting?: boolean;
+  /** Whether a deletion is currently in progress */
+  isDeleting?: boolean;
+  /** Whether the last deletion was successful */
+  isDeleteSuccess?: boolean;
 }
