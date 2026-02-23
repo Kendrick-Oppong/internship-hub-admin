@@ -7,6 +7,5 @@ export const useGetAllInternshipPeriods = (params: ApiQueryParams) => {
   return useQuery({
     queryKey: Query_Keys.internship.all(params),
     queryFn: () => internshipApi.getAllInternshipPeriods(params),
-    placeholderData: (previousData) => previousData,
   });
 };
