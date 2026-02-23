@@ -64,9 +64,7 @@ export function InternshipList({ events }: Readonly<InternshipListProps>) {
                 key={period.id}
                 className="hover:bg-slate-50/50 transition-colors h-14"
               >
-                <TableCell className="font-medium text-slate-900">
-                  {period.name}
-                </TableCell>
+                <TableCell>{period.name}</TableCell>
 
                 <TableCell>{formatDate(period.startDate)}</TableCell>
 
@@ -76,7 +74,7 @@ export function InternshipList({ events }: Readonly<InternshipListProps>) {
                   <Badge
                     className={cn(
                       "font-medium shadow-none",
-                      getStatusColor(period.status),
+                      getStatusColor(period.status)
                     )}
                     variant="outline"
                   >
