@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { useState, useCallback } from "react";
 import { useZoneDrawing } from "@/lib/hooks/map/use-zone-drawing";
 import { getMidpoint, getPolygonCentroid } from "@/lib/utils";
+import { DeleteConfirmationDialog } from "@/components/common/delete-confirmation-dialog";
 
 export function MapDrawingLayer({
   isDrawActive,
@@ -23,6 +24,8 @@ export function MapDrawingLayer({
   onDeleteZone,
   editingZoneId,
   onUpdateZoneCoordinates,
+  isDeleting = false,
+  isDeleteSuccess = false,
 }: Readonly<MapDrawingLayerProps>) {
   const { drawingPoints, cursorPosition } = useZoneDrawing({
     isDrawActive,
@@ -245,18 +248,26 @@ export function MapDrawingLayer({
                     <Edit className="size-3.5" />
                     Edit
                   </Button>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="flex-1 text-xs h-8 text-destructive hover:text-destructive hover:bg-destructive/5 border-destructive/30"
-                    onClick={() => {
-                      setActivePopupZoneId(null);
+                  <DeleteConfirmationDialog
+                    data={zone}
+                    onDelete={() => {
                       onDeleteZone(zone.id);
                     }}
+                    onCloseDialog={() => {
+                      // Optionally keep the popup open or closed based on design
+                    }}
+                    isDeleting={isDeleting}
+                    isSuccess={isDeleteSuccess}
                   >
-                    <Trash2 className="size-3.5" />
-                    Delete
-                  </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="flex-1 text-xs h-8 text-destructive hover:text-destructive hover:bg-destructive/5 border-destructive/30"
+                    >
+                      <Trash2 className="size-3.5" />
+                      Delete
+                    </Button>
+                  </DeleteConfirmationDialog>
                 </div>
               </div>
             </MapPopup>
