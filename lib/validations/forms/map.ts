@@ -6,6 +6,7 @@ export const zoneSchema = z.object({
   transparency: z.number().min(0).max(1),
   borderWidth: z.number().min(1).max(10),
   description: z.string().max(500, "Description must be 500 characters or less").optional(),
+  coordinates: z.array(z.tuple([z.number(), z.number()])).min(3, "At least 3 coordinates are required"),
 });
 
 export type ZoneFormData = z.infer<typeof zoneSchema>;
