@@ -134,7 +134,10 @@ api.interceptors.response.use(
         }
         localStorage.removeItem("csrf_token");
 
-        if (typeof window !== "undefined") {
+        if (
+          typeof window !== "undefined" &&
+          window.location.pathname !== "/auth/login"
+        ) {
           window.location.href = "/auth/login";
         }
 
