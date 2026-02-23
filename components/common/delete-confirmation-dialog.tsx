@@ -68,6 +68,7 @@ export function DeleteConfirmationDialog({
     >
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
+        disableClose={isDeleting}
         className="max-w-md"
         onPointerDownOutside={(e) => {
           if (isDeleting) e.preventDefault();
