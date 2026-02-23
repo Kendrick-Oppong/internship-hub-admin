@@ -1,15 +1,9 @@
 "use client";
 
 import { useGetSupervisionActivities } from "@/lib/hooks/queries/use-supervision-queries";
-import {
-  RecentActivitySkeleton,
-} from "@/components/common/skeleton-loader";
+import { RecentActivitySkeleton } from "@/components/common/skeleton-loader";
 import { formatDistanceToNow } from "date-fns";
 import { Check, UserPlus, Map, FileText, LucideIcon } from "lucide-react";
-
-interface RecentActivityProps {
-  internshipPeriodId?: string;
-}
 
 const ACTION_CONFIG: Record<
   string,
@@ -58,10 +52,7 @@ export const RecentSupervisionLogs = () => {
   return (
     <section className="p-6 h-96 bg-white rounded-lg border border-gray-300 shadow-card transition-shadow overflow-hidden flex flex-col">
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-xl font-bold text-[#1F2937]">Recent Activity</h3>
-        <button className="text-sm font-semibold text-[#4F46E5] hover:underline">
-          View all
-        </button>
+        <h3 className="text-lg font-semibold">Recent Activity</h3>
       </div>
 
       <div className="flex-1 overflow-y-auto pr-2 space-y-6 scrollbar-hide">

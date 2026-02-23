@@ -80,7 +80,7 @@ export const InternshipPeriod = () => {
               onValueChange={setStatus}
               disabled={isLoading}
             >
-              <SelectTrigger className="rounded-full border border-gray-400 shadow-none min-w-[140px]">
+              <SelectTrigger className="rounded-full border border-gray-400 shadow-none min-w-35">
                 <SelectValue placeholder="Filter by" />
               </SelectTrigger>
               <SelectContent side="bottom">
