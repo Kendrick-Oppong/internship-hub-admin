@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { useAppDispatch } from "@/lib/store/hooks";
 import {
   setCredentials,
@@ -15,8 +16,12 @@ import { API_ENDPOINTS } from "@/lib/constants/api-endpoints";
  */
 export function SessionInitializer() {
   const dispatch = useAppDispatch();
+  const pathname = usePathname();
 
   useEffect(() => {
+    // skipping session check if we are on an auth page
+    if (pathname?.startsWith("/auth/")) return;
+
     const checkSession = async () => {
       try {
         const response = await api.get(API_ENDPOINTS.AUTH.SESSION);
