@@ -21,6 +21,7 @@ export const API_ENDPOINTS = {
     GET_PROFILE: "/profile",
     UPDATE_PROFILE: (id: string | number) => `/profile/admin/${id}`,
     UPLOAD_PROFILE_PICTURE: "/profile/upload",
+    STUDENTS: "/profile/students",
   },
   INTERNSHIP: {
     PERIODS: "/internship-periods",
