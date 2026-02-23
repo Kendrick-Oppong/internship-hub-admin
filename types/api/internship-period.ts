@@ -10,7 +10,7 @@ export interface InternshipPeriod {
   eligibleCategories: string[];
 }
 
-export type InternshipPeriodsResponse = ApiPaginatedResponse<InternshipPeriod>;
+export type InternshipPeriodsResponse = ApiPaginatedResponse<InternshipPeriod[]>;
 
 
 export interface MultiSelectOption {
