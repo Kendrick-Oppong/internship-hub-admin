@@ -74,7 +74,7 @@ export function useZoneDrawing({
 
       setDrawingPoints((prev) => {
         // Check if clicking near the first point to close the polygon
-        if (prev.length >= 3) {
+        if (prev.length >= 4) {
           const firstPoint = map.project(prev[0] as [number, number]);
           const clickPoint = e.point;
           const dx = firstPoint.x - clickPoint.x;
@@ -104,7 +104,7 @@ export function useZoneDrawing({
       e.preventDefault();
 
       setDrawingPoints((prev) => {
-        if (prev.length >= 3) {
+        if (prev.length >= 4) {
           const completedCoords = [...prev];
           setTimeout(() => {
             onPolygonCompleteRef.current(completedCoords);

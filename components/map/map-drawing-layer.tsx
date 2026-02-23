@@ -91,7 +91,7 @@ export function MapDrawingLayer({
           <MarkerContent>
             <div
               className={`size-3 rounded-full border-2 border-white shadow-md ${
-                index === 0 && drawingPoints.length >= 3
+                index === 0 && drawingPoints.length >= 4
                   ? "bg-green-500 ring-2 ring-green-500/30 size-4"
                   : "bg-blue-500"
               }`}
@@ -101,9 +101,9 @@ export function MapDrawingLayer({
       ))}
 
       {/* Instructions tooltip when drawing */}
-      {drawingPoints.length > 0 && drawingPoints.length < 3 && (
+      {drawingPoints.length > 0 && drawingPoints.length < 4 && (
         <div className="absolute bottom-14 left-1/2 -translate-x-1/2 z-20 bg-primary text-white text-xs px-4 py-2 rounded-full whitespace-nowrap backdrop-blur-sm shadow-lg pointer-events-none">
-          Click to add points ({3 - drawingPoints.length} more needed) •{" "}
+          Click to add points ({4 - drawingPoints.length} more needed) •{" "}
           <kbd className="px-1.5 py-0.5 bg-white/20 rounded text-[10px]">
             Esc
           </kbd>{" "}
@@ -111,7 +111,7 @@ export function MapDrawingLayer({
         </div>
       )}
 
-      {drawingPoints.length >= 3 && (
+      {drawingPoints.length >= 4 && (
         <div className="absolute bottom-14 left-1/2 -translate-x-1/2 z-20 bg-primary text-white text-xs px-4 py-2 rounded-full whitespace-nowrap backdrop-blur-sm shadow-lg pointer-events-none">
           Double-click or click{" "}
           <span className="px-1.5 py-0.5 bg-white/20 rounded font-medium">
