@@ -9,4 +9,7 @@ export const FILTER_CONFIGS: Record<string, FilterConfig> = {
       endDate: "endDate",
     },
   },
+  STUDENTS: {
+    searchParam: "name",
+  },
 };
