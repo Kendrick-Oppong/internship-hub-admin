@@ -31,6 +31,10 @@ export const API_ENDPOINTS = {
     PIE_CHART: "/supervision/stats/pie-chart",
     ACTIVITIES: "/supervision/stats/activities",
   },
+  ZONES: {
+    BASE: "/zones",
+    BY_ID: (id: string) => `/zones/${id}`,
+  },
 };
 
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
