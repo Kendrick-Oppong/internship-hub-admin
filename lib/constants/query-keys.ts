@@ -2,14 +2,25 @@ import { ApiQueryParams } from "@/types/common/filter-config";
 
 export const Query_Keys = {
   internship: {
-    all: (params: ApiQueryParams) => ["internship-periods", JSON.stringify(params)],
+    all: (params: ApiQueryParams) => [
+      "internship-periods",
+      JSON.stringify(params),
+    ],
     byId: (id: string) => ["internship-periods", id],
   },
   supervision: {
-    overallStats: (internshipPeriodId?: string) => ["supervision", "stats", "overall", internshipPeriodId],
+    overallStats: (internshipPeriodId?: string) => [
+      "supervision",
+      "stats",
+      "overall",
+      internshipPeriodId,
+    ],
   },
   zones: {
     all: () => ["zones"],
     byId: (id: string) => ["zones", id],
+  },
+  students: {
+    all: (params: ApiQueryParams) => ["students", JSON.stringify(params)],
   },
 } as const;
