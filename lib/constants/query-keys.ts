@@ -8,4 +8,8 @@ export const Query_Keys = {
   supervision: {
     overallStats: (internshipPeriodId?: string) => ["supervision", "stats", "overall", internshipPeriodId],
   },
+  zones: {
+    all: () => ["zones"],
+    byId: (id: string) => ["zones", id],
+  },
 } as const;
