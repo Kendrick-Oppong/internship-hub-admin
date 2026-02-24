@@ -7,12 +7,12 @@ import {
 } from "@/lib/store/slices/auth-slice";
 import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar";
 import { Bell, Loader2 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, getInitials } from "@/lib/utils";
 
 export function Header() {
   const user = useAppSelector(selectCurrentUser);
   const isUploading = useAppSelector(selectIsUploadingImage);
-  const initials = `${user?.firstName?.[0] || ""}${user?.lastName?.[0] || ""}`;
+  const initials = getInitials(user?.firstName || "", user?.lastName || "");
 
   return (
     <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6">

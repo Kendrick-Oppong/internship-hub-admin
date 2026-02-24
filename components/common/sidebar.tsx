@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { cn } from "@/lib/utils";
+import { cn, getInitials } from "@/lib/utils";
 import Image from "next/image";
 import { sideBarNavItems } from "@/lib/constants/navigation";
 import { useAppSelector } from "@/lib/store/hooks";
@@ -26,7 +26,7 @@ export function Sidebar() {
   const pathname = usePathname();
   const user = useAppSelector(selectCurrentUser);
   const isUploading = useAppSelector(selectIsUploadingImage);
-  const initials = `${user?.firstName?.[0] || ""}${user?.lastName?.[0] || ""}`;
+  const initials = getInitials(user?.firstName || "", user?.lastName || "");
 
   const { mutate: logout, isPending: isLoggingOut } = useLogout();
 

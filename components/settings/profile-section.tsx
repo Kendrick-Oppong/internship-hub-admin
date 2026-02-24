@@ -10,12 +10,12 @@ import {
 } from "@/lib/store/slices/auth-slice";
 import { CheckCircle2, Mail, Camera, Shield, Loader2 } from "lucide-react";
 import { ProfileImageDialog } from "./profile-image-dialog";
-import { cn } from "@/lib/utils";
+import { cn, getInitials } from "@/lib/utils";
 
 export function ProfileSection() {
   const user = useAppSelector(selectCurrentUser);
   const isUploading = useAppSelector(selectIsUploadingImage);
-  const initials = `${user?.firstName?.[0] || ""}${user?.lastName?.[0] || ""}`;
+  const initials = getInitials(user?.firstName || "", user?.lastName || "");
 
   return (
     <div className="relative overflow-hidden">
