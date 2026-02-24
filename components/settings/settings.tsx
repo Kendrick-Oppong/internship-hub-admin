@@ -5,7 +5,7 @@ export const Settings = () => {
  
 
   return (
-    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+    <>
       <div className="flex items-center justify-between mb-3">
         <h3 className="text-lg font-semibold">Settings</h3>
       </div>
@@ -25,6 +25,6 @@ export const Settings = () => {
           <SecuritySection />
         </section>
       </div>
-    </div>
+    </>
   );
 };

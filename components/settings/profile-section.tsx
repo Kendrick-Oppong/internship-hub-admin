@@ -20,8 +20,8 @@ export function ProfileSection() {
   return (
     <div className="relative overflow-hidden">
       {/* Decorative Banner */}
-      <div className="h-32 bg-gradient-to-r rounded-lg from-primary to-primary/80 relative">
-        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20" />
+      <div className="h-32 bg-linear-to-r rounded-lg from-slate-800 to-slate-700 relative">
+        <div className="absolute inset-0 bg-[url('/images/grid.svg')] bg-no-repeat bg-center bg-cover" />
       </div>
 
       <div className="px-6 pb-6">
