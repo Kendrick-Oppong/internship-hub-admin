@@ -77,14 +77,14 @@ export function MapToolbar({
                 />
               </div>
 
-              <div className="max-h-64 overflow-y-auto p-1.5 custom-scrollbar">
+              <div className="max-h-64 overflow-y-auto p-1.5">
                 {filteredZones.length === 0 ? (
-                  <div className="p-8 text-center bg-gray-50/30 rounded-lg">
+                  <div className="p-4 text-center bg-gray-50/30 rounded-lg">
                     <div className="inline-flex size-10 items-center justify-center rounded-full bg-gray-100 mb-3">
                       <Search className="size-5 text-gray-400" />
                     </div>
                     <p className="text-xs font-medium text-gray-500">
-                      No zones found for "{searchQuery}"
+                      No zones found for &quot;{searchQuery}&quot;
                     </p>
                   </div>
                 ) : (
@@ -93,7 +93,7 @@ export function MapToolbar({
                       <Fragment key={zone.id}>
                         <button
                           onClick={() => handleSelectZone(zone)}
-                          className="w-full text-left px-3 py-2.5 rounded-lg hover:bg-primary/5 hover:text-primary transition-all group flex items-center justify-between"
+                          className="w-full text-left px-3 py-2.5 rounded-lg hover:bg-primary/5 hover:text-primary transition-all group cursor-pointer flex items-center justify-between"
                         >
                           <div className="flex items-center gap-3 min-w-0">
                             <div
@@ -137,7 +137,7 @@ export function MapToolbar({
             "flex items-center gap-2 h-9 px-4 rounded-lg transition-all text-xs",
             isDrawActive
               ? "bg-primary text-primary-foreground hover:bg-primary/90"
-              : ""
+              : "",
           )}
         >
           <Pentagon className="size-4" />
