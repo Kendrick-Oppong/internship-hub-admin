@@ -292,6 +292,8 @@ export function MapZones() {
           onDrawActiveChange={setIsDrawActive}
           showBoundaries={showBoundaries}
           onShowBoundariesChange={setShowBoundaries}
+          zones={zonesWithPreview}
+          onZoneSelect={(zone) => flyToCoordinates(zone.coordinates)}
         />
         <MapStyleSelector value={style} onChange={setStyle} />
         <MapViewportInfo viewport={viewport} />
