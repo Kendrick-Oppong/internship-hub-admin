@@ -62,7 +62,7 @@ export function StudentList({ students }: Readonly<StudentListProps>) {
                 className="hover:bg-slate-50/50 transition-colors h-14"
               >
                 <TableCell>
-                  <Link href={`/students/${student.id}`}>
+                  <Link href={`/dashboard/students/${student.id}`}>
                     <Avatar>
                       <AvatarImage
                         className="object-cover object-top"
@@ -76,7 +76,7 @@ export function StudentList({ students }: Readonly<StudentListProps>) {
                   </Link>
                 </TableCell>
                 <TableCell className="font-medium text-slate-900">
-                  <Link href={`/students/${student.id}`}>
+                  <Link href={`/dashboard/students/${student.id}`}>
                     {student.firstName} {student.lastName}
                   </Link>
                 </TableCell>
@@ -117,7 +117,7 @@ export function StudentList({ students }: Readonly<StudentListProps>) {
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="center">
-                      <Link href={`/students/${student.id}`}>
+                      <Link href={`/dashboard/students/${student.id}`}>
                         <DropdownMenuItem className="gap-2 cursor-pointer">
                           <Eye className="h-4 w-4 text-slate-500" />
                           View Details
