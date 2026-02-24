@@ -22,5 +22,6 @@ export const Query_Keys = {
   },
   students: {
     all: (params: ApiQueryParams) => ["students", JSON.stringify(params)],
+    byId: (id: string) => ["students", id],
   },
 } as const;
