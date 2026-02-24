@@ -35,7 +35,8 @@ interface SkeletonLoaderProps {
     | "stats-card"
     | "progress-chart"
     | "pie-chart"
-    | "activity-list";
+    | "activity-list"
+    | "student-detail";
   count?: number;
 }
 
@@ -115,6 +116,59 @@ export const SkeletonLoader = ({ type, count = 5 }: SkeletonLoaderProps) => {
 
   if (type === "activity-list") {
     return <ActivityListSkeleton count={count} />;
+  }
+
+  if (type === "student-detail") {
+    return (
+      <div className="animate-pulse space-y-6">
+        {/* Header Skeleton */}
+        <div className="bg-white rounded-xl border border-gray-300 shadow-card overflow-hidden">
+          <div className="h-32 bg-slate-200" />
+          <div className="px-6 pb-6 pt-0">
+            <div className="relative flex flex-col sm:flex-row items-center sm:items-end -mt-7 mb-6 gap-4">
+              <Skeleton className="h-24 w-24 rounded-full border-4 border-white shadow-md bg-slate-200" />
+              <div className="flex-1 space-y-3 pt-2 sm:pt-0">
+                <div className="flex items-center gap-3">
+                  <Skeleton className="h-8 w-48" />
+                  <Skeleton className="h-6 w-20 rounded-full" />
+                </div>
+                <div className="flex gap-4">
+                  <Skeleton className="h-4 w-32" />
+                  <Skeleton className="h-4 w-32" />
+                </div>
+              </div>
+              <div className="flex gap-2">
+                <Skeleton className="h-9 w-24 rounded-full" />
+                <Skeleton className="h-9 w-24 rounded-full" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Grid Skeleton */}
+        <div className="grid grid-cols-1 gap-6">
+          {[...Array(2)].map((_, i) => (
+            <div
+              key={i}
+              className="bg-white rounded-lg border border-gray-300 shadow-card p-4 space-y-6"
+            >
+              <div className="flex items-center gap-2">
+                <Skeleton className="h-8 w-8 rounded-lg" />
+                <Skeleton className="h-6 w-40" />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[...Array(6)].map((_, j) => (
+                  <div key={j} className="space-y-2">
+                    <Skeleton className="h-3 w-20" />
+                    <Skeleton className="h-10 w-full rounded-lg" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
   }
 
   // Add other types as needed
