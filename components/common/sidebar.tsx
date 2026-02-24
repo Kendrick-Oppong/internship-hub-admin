@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { cn, getInitials } from "@/lib/utils";
+import { cn, getInitials, isActiveRoute } from "@/lib/utils";
 import Image from "next/image";
 import { sideBarNavItems } from "@/lib/constants/navigation";
 import { useAppSelector } from "@/lib/store/hooks";
@@ -50,7 +50,7 @@ export function Sidebar() {
       <nav className="flex-1 px-3 py-4 space-y-1">
         {sideBarNavItems.map((item) => {
           const Icon = item.icon;
-          const isActive = pathname === item.href;
+          const isActive = isActiveRoute(item.href, pathname);
 
           return (
             <Link
