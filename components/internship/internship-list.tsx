@@ -54,7 +54,7 @@ export function InternshipList({ events }: Readonly<InternshipListProps>) {
             <TableHead className="font-semibold text-slate-600">
               Status
             </TableHead>
-            <TableHead className="w-[50px]"></TableHead>
+            <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -98,9 +98,7 @@ export function InternshipList({ events }: Readonly<InternshipListProps>) {
                         <MoreHorizontal className="h-4 w-4" />
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="w-[160px]">
-                      <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                      <DropdownMenuSeparator />
+                    <DropdownMenuContent align="center">
                       <InternshipPeriodDialog
                         event={period}
                         onCloseDialog={() => setOpenMenuId(null)}

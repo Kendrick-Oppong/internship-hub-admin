@@ -44,9 +44,9 @@ export function StudentList({ students }: Readonly<StudentListProps>) {
               Faculty
             </TableHead>
             <TableHead className="font-semibold text-slate-600">
-              Programme/Level
+              Programme
             </TableHead>
-            <TableHead className="w-[50px]"></TableHead>
+            <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -95,9 +95,7 @@ export function StudentList({ students }: Readonly<StudentListProps>) {
                         <MoreHorizontal className="h-4 w-4" />
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="w-[160px]">
-                      <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                      <DropdownMenuSeparator />
+                    <DropdownMenuContent align="center">
                       <DropdownMenuItem className="gap-2 cursor-pointer">
                         <Eye className="h-4 w-4 text-slate-500" />
                         View Details
