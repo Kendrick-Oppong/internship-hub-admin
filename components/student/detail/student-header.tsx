@@ -1,12 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { getInitials } from "@/lib/utils";
-import {
-  CheckCircle2,
-  Mail,
-  Phone,
-  Edit,
-} from "lucide-react";
+import { CheckCircle2, Mail, Phone, Edit } from "lucide-react";
 import { Student } from "@/types/api/student";
 import { Button } from "@/components/ui/button";
 
@@ -38,9 +33,11 @@ export function StudentHeader({ student }: Readonly<StudentHeaderProps>) {
                 {initials}
               </AvatarFallback>
             </Avatar>
-            <div className="absolute bottom-0 right-0 h-8 w-8 rounded-full bg-green-500 border-2 border-white flex items-center justify-center shadow-sm">
-              <CheckCircle2 className="size-4 text-white" />
-            </div>
+            {student.auth.verifiedAt && (
+              <div className="absolute bottom-0 right-0 h-8 w-8 rounded-full bg-green-500 border-2 border-white flex items-center justify-center shadow-sm">
+                <CheckCircle2 className="size-4 text-white" />
+              </div>
+            )}
           </div>
 
           <div className="flex-1 text-center sm:text-left pt-2 sm:pt-0">
