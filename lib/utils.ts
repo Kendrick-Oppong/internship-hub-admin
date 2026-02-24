@@ -37,23 +37,24 @@ export function getDeviceInfo() {
 }
 
 export const getStatusColor = (status: string) => {
-   switch (status) {
-     case "ONGOING":
-       return "bg-yellow-400 text-black";
-     case "COMPLETED":
-       return "bg-green-600 text-white";
-     default:
-       return "bg-slate-500 text-white";
-   }
+  switch (status) {
+    case "ONGOING":
+      return "bg-yellow-400 text-black";
+    case "COMPLETED":
+      return "bg-green-600 text-white";
+    default:
+      return "bg-slate-500 text-white";
+  }
 };
- 
+
 // Formats ISO string to e.g. "2nd April 2024"
 export const formatDate = (isoString: string): string => {
   return format(new Date(isoString), "do MMMM yyyy");
 };
 
-
-export function getPolygonCentroid(coordinates: [number, number][]): [number, number] {
+export function getPolygonCentroid(
+  coordinates: [number, number][]
+): [number, number] {
   let sumLng = 0;
   let sumLat = 0;
   for (const [lng, lat] of coordinates) {
@@ -68,4 +69,8 @@ export function getMidpoint(
   p2: [number, number]
 ): [number, number] {
   return [(p1[0] + p2[0]) / 2, (p1[1] + p2[1]) / 2];
+}
+
+export function getInitials(firstName: string, lastName: string) {
+  return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
 }

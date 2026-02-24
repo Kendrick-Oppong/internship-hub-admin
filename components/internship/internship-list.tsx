@@ -54,7 +54,9 @@ export function InternshipList({ events }: Readonly<InternshipListProps>) {
             <TableHead className="font-semibold text-slate-600">
               Status
             </TableHead>
-            <TableHead>Actions</TableHead>
+            <TableHead className="font-semibold text-slate-600">
+              Actions
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

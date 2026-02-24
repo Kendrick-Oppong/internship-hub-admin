@@ -2,6 +2,7 @@
 
 import { MoreHorizontal, Edit, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { cn, getInitials } from "@/lib/utils";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,6 +21,7 @@ import {
 } from "@/components/ui/table";
 import { useState } from "react";
 import { Student } from "@/types/api/student";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface StudentListProps {
   students: Student[];
@@ -33,6 +35,7 @@ export function StudentList({ students }: Readonly<StudentListProps>) {
       <Table>
         <TableHeader>
           <TableRow className="bg-slate-50/50 hover:bg-slate-50/50 h-12">
+            <TableHead className="w-[50px]"></TableHead>
             <TableHead className="font-semibold text-slate-600">Name</TableHead>
             <TableHead className="font-semibold text-slate-600">
               Index Number
@@ -46,7 +49,9 @@ export function StudentList({ students }: Readonly<StudentListProps>) {
             <TableHead className="font-semibold text-slate-600">
               Programme
             </TableHead>
-            <TableHead>Actions</TableHead>
+            <TableHead className="font-semibold text-slate-600">
+              Actions
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -57,6 +62,18 @@ export function StudentList({ students }: Readonly<StudentListProps>) {
                 className="hover:bg-slate-50/50 transition-colors h-14"
               >
                 <TableCell>
+                  <Avatar>
+                    <AvatarImage
+                      className="object-cover object-top"
+                      src={student.avatarUrl ?? ""}
+                      alt={`${student.firstName} ${student.lastName}`}
+                    />
+                    <AvatarFallback className="bg-primary/10 text-primary font-semibold">
+                      {getInitials(student.firstName, student.lastName)}
+                    </AvatarFallback>
+                  </Avatar>
+                </TableCell>
+                <TableCell className="font-medium text-slate-900">
                   {student.firstName} {student.lastName}
                 </TableCell>
 
@@ -112,7 +129,7 @@ export function StudentList({ students }: Readonly<StudentListProps>) {
             ))
           ) : (
             <TableRow className="h-14">
-              <TableCell colSpan={6} className="text-center font-semibold">
+              <TableCell colSpan={7} className="text-center font-semibold">
                 No students found
               </TableCell>
             </TableRow>
