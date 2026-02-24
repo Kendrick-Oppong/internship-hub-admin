@@ -9,3 +9,11 @@ export const useGetAllStudents = (params: ApiQueryParams) => {
     queryFn: () => studentApi.getAllStudents(params),
   });
 };
+
+export const useGetStudentById = (id: string) => {
+  return useQuery({
+    queryKey: Query_Keys.students.byId(id),
+    queryFn: () => studentApi.getStudentById(id),
+    enabled: !!id,
+  });
+};
