@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useMap } from "@/components/ui/map";
 import type MapLibreGL from "maplibre-gl";
+import { MIN_ZONE_POINTS } from "@/lib/constants/map";
 
 const CLOSE_DISTANCE_PX = 12;
 
@@ -74,7 +75,7 @@ export function useZoneDrawing({
 
       setDrawingPoints((prev) => {
         // Check if clicking near the first point to close the polygon
-        if (prev.length >= 4) {
+        if (prev.length >= MIN_ZONE_POINTS) {
           const firstPoint = map.project(prev[0] as [number, number]);
           const clickPoint = e.point;
           const dx = firstPoint.x - clickPoint.x;
@@ -104,7 +105,7 @@ export function useZoneDrawing({
       e.preventDefault();
 
       setDrawingPoints((prev) => {
-        if (prev.length >= 4) {
+        if (prev.length >= MIN_ZONE_POINTS) {
           const completedCoords = [...prev];
           setTimeout(() => {
             onPolygonCompleteRef.current(completedCoords);

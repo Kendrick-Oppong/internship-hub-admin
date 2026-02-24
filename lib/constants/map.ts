@@ -8,6 +8,8 @@ export const MAP_STYLES: Record<string, MapStyleOption> = {
 
 export type MapStyleKey = keyof typeof MAP_STYLES;
 
+// --- Drawing Constraints ---
+export const MIN_ZONE_POINTS = 3;
 
 // --- Preset Colors for Zone Theming ---
 export const PRESET_COLORS = [

@@ -1,4 +1,5 @@
 import z from "zod";
+import { MIN_ZONE_POINTS } from "@/lib/constants/map";
 
 export const zoneSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -11,7 +12,10 @@ export const zoneSchema = z.object({
     .optional(),
   coordinates: z
     .array(z.tuple([z.number(), z.number()]))
-    .min(4, "At least 4 coordinates are required"),
+    .min(
+      MIN_ZONE_POINTS,
+      `At least ${MIN_ZONE_POINTS} coordinates are required`
+    ),
 });
 
 export type ZoneFormData = z.infer<typeof zoneSchema>;
