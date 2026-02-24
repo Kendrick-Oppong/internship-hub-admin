@@ -12,14 +12,16 @@ const transformZoneFormDataToRequest = (
 ): CreateZoneRequest => {
   // Ensure the polygon is closed for the API (GeoJSON requirement)
   const closedCoordinates = [...coordinates];
+  const first = closedCoordinates.at(0);
+  const last = closedCoordinates.at(-1);
+
   if (
     closedCoordinates.length > 0 &&
-    (closedCoordinates[0][0] !==
-      closedCoordinates[closedCoordinates.length - 1][0] ||
-      closedCoordinates[0][1] !==
-        closedCoordinates[closedCoordinates.length - 1][1])
+    first &&
+    last &&
+    (first[0] !== last[0] || first[1] !== last[1])
   ) {
-    closedCoordinates.push(closedCoordinates[0]);
+    closedCoordinates.push(first);
   }
 
   return {
@@ -43,10 +45,15 @@ export const transformZoneApiResponseToZoneData = (
   // Remove the closing point for internal UI state (unique vertices only)
   // this makes editing much cleaner as we don't have overlapping handles
   const coordinates = [...allCoords];
+  const first = coordinates.at(0);
+  const last = coordinates.at(-1);
+
   if (
     coordinates.length > 1 &&
-    coordinates[0][0] === coordinates[coordinates.length - 1][0] &&
-    coordinates[0][1] === coordinates[coordinates.length - 1][1]
+    first &&
+    last &&
+    first[0] === last[0] &&
+    first[1] === last[1]
   ) {
     coordinates.pop();
   }
