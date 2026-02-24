@@ -21,6 +21,7 @@ import {
 import { useState } from "react";
 import { Student } from "@/types/api/student";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Link from "next/link";
 
 interface StudentListProps {
   students: Student[];
@@ -61,19 +62,23 @@ export function StudentList({ students }: Readonly<StudentListProps>) {
                 className="hover:bg-slate-50/50 transition-colors h-14"
               >
                 <TableCell>
-                  <Avatar>
-                    <AvatarImage
-                      className="object-cover object-top"
-                      src={student.avatarUrl ?? ""}
-                      alt={`${student.firstName} ${student.lastName}`}
-                    />
-                    <AvatarFallback className="bg-primary/10 text-primary font-semibold">
-                      {getInitials(student.firstName, student.lastName)}
-                    </AvatarFallback>
-                  </Avatar>
+                  <Link href={`/students/${student.id}`}>
+                    <Avatar>
+                      <AvatarImage
+                        className="object-cover object-top"
+                        src={student.avatarUrl ?? ""}
+                        alt={`${student.firstName} ${student.lastName}`}
+                      />
+                      <AvatarFallback className="bg-primary/10 text-primary font-semibold">
+                        {getInitials(student.firstName, student.lastName)}
+                      </AvatarFallback>
+                    </Avatar>
+                  </Link>
                 </TableCell>
                 <TableCell className="font-medium text-slate-900">
-                  {student.firstName} {student.lastName}
+                  <Link href={`/students/${student.id}`}>
+                    {student.firstName} {student.lastName}
+                  </Link>
                 </TableCell>
 
                 <TableCell>{student.studentProfile.indexNumber}</TableCell>
@@ -112,10 +117,12 @@ export function StudentList({ students }: Readonly<StudentListProps>) {
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="center">
-                      <DropdownMenuItem className="gap-2 cursor-pointer">
-                        <Eye className="h-4 w-4 text-slate-500" />
-                        View Details
-                      </DropdownMenuItem>
+                      <Link href={`/students/${student.id}`}>
+                        <DropdownMenuItem className="gap-2 cursor-pointer">
+                          <Eye className="h-4 w-4 text-slate-500" />
+                          View Details
+                        </DropdownMenuItem>
+                      </Link>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem className="gap-2 cursor-pointer">
                         <Edit className="h-4 w-4 text-slate-500" />
