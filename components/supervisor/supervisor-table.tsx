@@ -1,5 +1,3 @@
-"use client";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -12,6 +10,9 @@ import {
 } from "@/components/ui/table";
 import { getInitials } from "@/lib/utils";
 import { Supervisor } from "@/types/api/supervisor";
+import Link from "next/link";
+import { Eye } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface SupervisorTableProps {
   supervisors: Supervisor[];
@@ -90,6 +91,19 @@ export function SupervisorTable({
                   >
                     {supervisor.auth.isActive ? "Active" : "Inactive"}
                   </Badge>
+                </TableCell>
+                <TableCell className="text-right">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-8 w-8 p-0 text-slate-400 hover:text-primary hover:bg-primary/5 mr-2"
+                    asChild
+                  >
+                    <Link href={`/dashboard/supervisors/${supervisor.id}`}>
+                      <Eye className="h-4 w-4" />
+                      <span className="sr-only">View Details</span>
+                    </Link>
+                  </Button>
                 </TableCell>
               </TableRow>
             ))

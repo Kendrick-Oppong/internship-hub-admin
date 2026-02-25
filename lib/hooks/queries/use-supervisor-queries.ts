@@ -9,3 +9,11 @@ export const useGetAllSupervisors = (params: ApiQueryParams) => {
     queryFn: () => supervisorApi.getAllSupervisors(params),
   });
 };
+
+export const useGetSupervisorById = (id: string) => {
+  return useQuery({
+    queryKey: Query_Keys.supervisors.byId(id),
+    queryFn: () => supervisorApi.getSupervisorById(id),
+    enabled: !!id,
+  });
+};
