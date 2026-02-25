@@ -12,4 +12,7 @@ export const FILTER_CONFIGS: Record<string, FilterConfig> = {
   STUDENTS: {
     searchParam: "name",
   },
+  SUPERVISORS: {
+    searchParam: "name",
+  },
 };
