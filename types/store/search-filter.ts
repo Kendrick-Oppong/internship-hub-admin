@@ -9,4 +9,5 @@ export interface FilterState {
 export interface EntityFilters {
   internshipPeriods: FilterState;
   students: FilterState;
+  supervisors: FilterState;
 }
