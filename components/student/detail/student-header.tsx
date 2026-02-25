@@ -4,6 +4,7 @@ import { getInitials } from "@/lib/utils";
 import { CheckCircle2, Mail, Phone, Edit } from "lucide-react";
 import { Student } from "@/types/api/student";
 import { Button } from "@/components/ui/button";
+import { StudentEditDialog } from "./student-edit-dialog";
 
 interface StudentHeaderProps {
   student: Student;
@@ -66,10 +67,12 @@ export function StudentHeader({ student }: Readonly<StudentHeaderProps>) {
           </div>
 
           <div className="flex gap-2 mt-2 sm:mt-0">
-            <Button size="sm" className="gap-2 px-3!">
-              <Edit className="h-4 w-4" />
-              Edit
-            </Button>
+            <StudentEditDialog student={student}>
+              <Button size="sm" className="gap-2 px-3!">
+                <Edit className="h-4 w-4" />
+                Edit
+              </Button>
+            </StudentEditDialog>
           </div>
         </div>
       </div>
