@@ -22,6 +22,7 @@ import { useState } from "react";
 import { Student } from "@/types/api/student";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
+import { StudentEditDialog } from "./detail/student-edit-dialog";
 
 interface StudentListProps {
   students: Student[];
@@ -124,10 +125,18 @@ export function StudentList({ students }: Readonly<StudentListProps>) {
                         </DropdownMenuItem>
                       </Link>
                       <DropdownMenuSeparator />
-                      <DropdownMenuItem className="gap-2 cursor-pointer">
-                        <Edit className="h-4 w-4 text-slate-500" />
-                        Edit
-                      </DropdownMenuItem>
+                      <StudentEditDialog
+                        student={student}
+                        onCloseDialog={() => setOpenMenuId(null)}
+                      >
+                        <DropdownMenuItem
+                          className="gap-2 cursor-pointer"
+                          onSelect={(e) => e.preventDefault()}
+                        >
+                          <Edit className="h-4 w-4 text-slate-500" />
+                          Edit
+                        </DropdownMenuItem>
+                      </StudentEditDialog>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </TableCell>
