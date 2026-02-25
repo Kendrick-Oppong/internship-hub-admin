@@ -12,6 +12,7 @@ const initialFilterState: FilterState = {
 const initialState: EntityFilters = {
   internshipPeriods: initialFilterState,
   students: initialFilterState,
+  supervisors: initialFilterState,
 };
 
 const searchFilterSlice = createSlice({
