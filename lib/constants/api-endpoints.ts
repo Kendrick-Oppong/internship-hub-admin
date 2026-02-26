@@ -14,6 +14,7 @@ export const API_ENDPOINTS = {
     SUPERVISOR: {
       INVITE: "/auth/supervisor/invite",
       LIST: "/auth/supervisors",
+      GET_BY_ID: (id: string | number) => `/auth/supervisor/${id}`,
       UPDATE_STATUS: (id: string | number) => `/auth/supervisor/${id}/status`,
     },
   },

@@ -33,7 +33,7 @@ export function SupervisorDetails() {
 
   if (isError || !supervisor) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[400px] gap-4 text-center px-6 bg-white rounded-lg border border-gray-300 shadow-card p-4">
+      <div className="flex flex-col items-center justify-center min-h-100 gap-4 text-center px-6 bg-white rounded-lg border border-gray-300 shadow-card p-4">
         <div className="size-12 rounded-full bg-destructive/10 flex items-center justify-center">
           <AlertCircle className="h-6 w-6 text-destructive" />
         </div>

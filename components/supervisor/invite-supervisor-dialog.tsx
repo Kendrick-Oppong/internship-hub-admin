@@ -115,11 +115,12 @@ export function InviteSupervisorDialog({
 
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="space-y-4 py-4"
+              className="flex flex-col max-h-[calc(100vh-200px)]"
             >
-              <FieldGroup>
-                {/* Email Field */}
-                <Controller
+              <div className="overflow-y-auto px-1 py-4">
+                <FieldGroup className="space-y-4">
+                  {/* Email Field */}
+                  <Controller
                   control={control}
                   name="email"
                   render={({ field, fieldState: emailState }) => (
@@ -291,6 +292,7 @@ export function InviteSupervisorDialog({
                   )}
                 />
               </FieldGroup>
+              </div>
 
               <DialogFooter>
                 <Button

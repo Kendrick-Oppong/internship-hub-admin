@@ -13,7 +13,7 @@ export const supervisorApi = {
   },
   getSupervisorById: async (userId: string) => {
     const response = await api.get<Supervisor>(
-      API_ENDPOINTS.AUTH.SUPERVISOR.LIST + `/${userId}`
+      API_ENDPOINTS.AUTH.SUPERVISOR.GET_BY_ID(userId)
     );
     return response.data;
   },
