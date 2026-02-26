@@ -66,6 +66,16 @@ export const changePasswordSchema = z
     path: ["confirmPassword"],
   });
 
+export const inviteSupervisorSchema = z.object({
+  email: z.email("Invalid email address"),
+  firstName: z.string().min(2, "First name must be at least 2 characters"),
+  lastName: z.string().min(2, "Last name must be at least 2 characters"),
+  department: z.string().min(1, "Department is required"),
+  phoneNumber: z.string().min(10, "Phone number must be at least 10 digits"),
+  specialization: z.string().min(1, "Specialization is required"),
+  internshipPeriodId: z.string().min(1, "Internship period is required"),
+});
+
 export type LoginValues = z.infer<typeof loginSchema>;
 export type RegisterStudentValues = z.infer<typeof registerStudentSchema>;
 export type VerifyEmailValues = z.infer<typeof verifyEmailSchema>;
@@ -73,3 +83,4 @@ export type ResendVerificationValues = z.infer<typeof resendVerificationSchema>;
 export type ForgotPasswordValues = z.infer<typeof forgotPasswordSchema>;
 export type ResetPasswordValues = z.infer<typeof resetPasswordSchema>;
 export type ChangePasswordValues = z.infer<typeof changePasswordSchema>;
+export type InviteSupervisorValues = z.infer<typeof inviteSupervisorSchema>;

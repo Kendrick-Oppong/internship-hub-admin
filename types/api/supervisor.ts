@@ -32,3 +32,8 @@ export interface Supervisor {
 }
 
 export type SupervisorsResponse = ApiPaginatedResponse<Supervisor[]>;
+
+export interface InviteSupervisorResponse {
+  message: string;
+  temporaryPassword: string;
+}

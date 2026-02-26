@@ -17,6 +17,7 @@ import {
   ResetPasswordValues,
   VerifyEmailValues,
   ChangePasswordValues,
+  InviteSupervisorValues,
 } from "@/lib/validations/forms/auth";
 
 export const useLogin = () => {
@@ -189,6 +190,22 @@ export const useLogout = () => {
     onError: (error) => {
       console.error("Logout error:", error);
       toast.error(error instanceof Error ? error.message : "Failed to logout");
+    },
+  });
+};
+
+export const useInviteSupervisor = () => {
+  return useMutation({
+    mutationFn: (data: InviteSupervisorValues) =>
+      authMutationsApi.inviteSupervisor(data),
+    onSuccess: (data) => {
+      toast.success(data.message ?? "Supervisor invited successfully");
+    },
+    onError: (error) => {
+      console.error("Invite supervisor error:", error);
+      toast.error(
+        error instanceof Error ? error.message : "Failed to invite supervisor"
+      );
     },
   });
 };

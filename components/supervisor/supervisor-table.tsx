@@ -75,7 +75,7 @@ export function SupervisorTable({
                   {supervisor.supervisorProfile.department}
                 </TableCell>
                 <TableCell
-                  className="text-slate-600 max-w-[200px] truncate"
+                  className="text-slate-600 max-w-50 truncate"
                   title={supervisor.supervisorProfile.specialization ?? ""}
                 >
                   {supervisor.supervisorProfile.specialization || "N/A"}

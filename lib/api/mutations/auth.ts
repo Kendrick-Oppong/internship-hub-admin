@@ -8,8 +8,10 @@ import {
   ResetPasswordValues,
   VerifyEmailValues,
   ChangePasswordValues,
+  InviteSupervisorValues,
 } from "@/lib/validations/forms/auth";
 import { LoginResponse } from "@/types/api/auth";
+import { InviteSupervisorResponse } from "@/types/api/supervisor";
 
 export const authMutationsApi = {
   login: async (data: LoginValues) => {
@@ -62,6 +64,14 @@ export const authMutationsApi = {
 
   logout: async () => {
     const response = await api.post(API_ENDPOINTS.AUTH.LOGOUT);
+    return response.data;
+  },
+
+  inviteSupervisor: async (data: InviteSupervisorValues) => {
+    const response = await api.post<InviteSupervisorResponse>(
+      API_ENDPOINTS.AUTH.SUPERVISOR.INVITE,
+      data
+    );
     return response.data;
   },
 };
