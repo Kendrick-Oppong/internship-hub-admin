@@ -1,4 +1,4 @@
-import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
+import axios, { InternalAxiosRequestConfig } from "axios";
 import { API_BASE_URL, API_ENDPOINTS } from "@/lib/constants/api-endpoints";
 import { getStore } from "@/lib/store/store";
 import { setCsrfToken, clearCredentials } from "@/lib/store/slices/auth-slice";

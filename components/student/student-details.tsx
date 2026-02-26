@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 import { useGetStudentById } from "@/lib/hooks/queries/use-student-queries";
 import { StudentHeader } from "./detail/student-header";
 import { StudentInfoGrid } from "./detail/student-info-grid";
-import { Loader2, AlertCircle } from "lucide-react";
+import { AlertCircle } from "lucide-react";
 import { SkeletonLoader } from "@/components/common/skeleton-loader";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";

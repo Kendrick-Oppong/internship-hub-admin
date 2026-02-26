@@ -1,11 +1,9 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { KeyRound, ShieldCheck, Laptop, Globe, Shield } from "lucide-react";
+import { ShieldCheck, Laptop, Globe, Shield } from "lucide-react";
 import { useState, useEffect } from "react";
 import { getDeviceInfo } from "@/lib/utils";
-import Link from "next/link";
 
 export function SecuritySection() {
   const [deviceInfo, setDeviceInfo] = useState({

@@ -43,7 +43,7 @@ interface InviteSupervisorDialogProps {
 export function InviteSupervisorDialog({
   open,
   onOpenChange,
-}: InviteSupervisorDialogProps) {
+}: Readonly<InviteSupervisorDialogProps>) {
   const [showSuccessState, setShowSuccessState] = useState(false);
   const [temporaryPassword, setTemporaryPassword] = useState("");
   const [copied, setCopied] = useState(false);

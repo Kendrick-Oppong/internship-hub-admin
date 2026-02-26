@@ -13,7 +13,7 @@ interface StudentMarkersLayerProps {
   markers: MapMarkerData[];
 }
 
-export function StudentMarkersLayer({ markers }: StudentMarkersLayerProps) {
+export function StudentMarkersLayer({ markers }: Readonly<StudentMarkersLayerProps>) {
   const markerElements = useMemo(
     () =>
       markers.map((marker) => (
