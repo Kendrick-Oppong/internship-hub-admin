@@ -15,13 +15,18 @@ import type { ZoneData } from "@/types/api/map";
 import { MapToolbar } from "./map-toolbar";
 import { MapDrawingLayer } from "./map-drawing-layer";
 import { ZonePropertiesPanel } from "./zone-properties-panel";
+import { StudentMarkersLayer } from "./student-markers-layer";
 import type { ZoneFormData } from "@/lib/validations/forms/map";
 import { useGetAllZones } from "@/lib/hooks/queries/use-zones-queries";
+import { useGetMapMarkers } from "@/lib/hooks/queries/use-supervision-queries";
 import {
   useMutateZone,
   useDeleteZone,
   transformZoneApiResponseToZoneData,
 } from "@/lib/hooks/mutations/use-zones-mutations";
+import { useAppSelector } from "@/lib/store/hooks";
+import { selectSelectedPeriodId } from "@/lib/store/slices/dashboard-slice";
+import { PeriodSelector } from "@/components/dashboard/period-selector";
 
 export function MapZones() {
   const mapRef = useRef<MapRef>(null);
@@ -38,8 +43,12 @@ export function MapZones() {
   const selectedStyle = MAP_STYLES[style];
   const is3D = style === "osm_liberty";
 
+  // Get selected internship period from store
+  const internshipPeriodId = useAppSelector(selectSelectedPeriodId);
+
   // API hooks
   const { data: zonesData } = useGetAllZones();
+  const { data: mapMarkersData = [] } = useGetMapMarkers(internshipPeriodId);
   const mutateZone = useMutateZone();
   const deleteZone = useDeleteZone();
 
@@ -280,6 +289,11 @@ export function MapZones() {
         theme="light"
         styles={selectedStyle}
       >
+        {/* Period Selector */}
+        <div className="absolute top-16 left-2 z-10 bg-white rounded-lg border border-gray-300 shadow-card">
+          <PeriodSelector />
+        </div>
+
         <MapControls
           showFullscreen
           showZoom
@@ -314,6 +328,11 @@ export function MapZones() {
           isDeleting={deleteZone.isPending}
           isDeleteSuccess={deleteZone.isSuccess}
         />
+
+        {/* Student markers layer */}
+        {mapMarkersData.length > 0 && (
+          <StudentMarkersLayer markers={mapMarkersData} />
+        )}
 
         {panelOpen && (
           <ZonePropertiesPanel

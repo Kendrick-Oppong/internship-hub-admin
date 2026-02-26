@@ -46,7 +46,7 @@ export function PeriodSelector() {
   }, [periods, selectedPeriodId, dispatch]);
 
   if (isLoading) {
-    return <Skeleton className="h-9 w-[200px]" />;
+    return <Skeleton className="h-9 w-50" />;
   }
 
   return (

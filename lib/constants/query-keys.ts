@@ -15,6 +15,12 @@ export const Query_Keys = {
       "overall",
       internshipPeriodId,
     ],
+    mapMarkers: (internshipPeriodId?: string) => [
+      "supervision",
+      "stats",
+      "map-markers",
+      internshipPeriodId,
+    ],
   },
   zones: {
     all: () => ["zones"],

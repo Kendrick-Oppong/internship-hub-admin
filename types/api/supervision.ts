@@ -46,3 +46,15 @@ export interface SupervisionActivity {
         role: "ADMIN" | "SUPERVISOR" | "STUDENT";
     } | null;
 }
+
+export interface MapMarker {
+    id: string;
+    studentId: string;
+    studentName: string;
+    indexNumber: string;
+    companyName: string;
+    companyCity: string;
+    companyAddress: string;
+    latitude: number;
+    longitude: number;
+}

@@ -5,6 +5,7 @@ import {
     SupervisionProgressData,
     SupervisionPieChartData,
     SupervisionActivity,
+    MapMarker,
 } from "@/types/api/supervision";
 
 export const supervisionApi = {
@@ -43,6 +44,15 @@ export const supervisionApi = {
             API_ENDPOINTS.SUPERVISION.ACTIVITIES,
             {
                 params: { limit },
+            },
+        );
+        return response.data;
+    },
+    getMapMarkers: async (internshipPeriodId?: string) => {
+        const response = await api.get<MapMarker[]>(
+            API_ENDPOINTS.SUPERVISION.MAP_MARKERS,
+            {
+                params: { internshipPeriodId },
             },
         );
         return response.data;

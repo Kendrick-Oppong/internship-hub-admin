@@ -32,6 +32,7 @@ export const API_ENDPOINTS = {
     PROGRESS_CHART: "/supervision/stats/progress-chart",
     PIE_CHART: "/supervision/stats/pie-chart",
     ACTIVITIES: "/supervision/stats/activities",
+    MAP_MARKERS: "/supervision/stats/map-markers",
   },
   ZONES: {
     BASE: "/zones",

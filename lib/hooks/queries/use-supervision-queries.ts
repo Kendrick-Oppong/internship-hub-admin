@@ -42,3 +42,11 @@ export const useGetSupervisionActivities = (limit: number = 10) => {
         queryFn: () => supervisionApi.getActivities(limit),
     });
 };
+
+export const useGetMapMarkers = (internshipPeriodId?: string) => {
+    return useQuery({
+        queryKey: Query_Keys.supervision.mapMarkers(internshipPeriodId),
+        queryFn: () => supervisionApi.getMapMarkers(internshipPeriodId),
+        enabled: !!internshipPeriodId,
+    });
+};

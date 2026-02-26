@@ -27,7 +27,7 @@ export const OverallProgress = () => {
         <h3 className="text-lg font-semibold">Overall Progress</h3>
       </div>
 
-      <div className="h-[280px] w-full mt-4">
+      <div className="h-70 w-full mt-4">
         {isLoading ? (
           <SkeletonLoader type="pie-chart" />
         ) : chartData && chartData.length > 0 ? (
