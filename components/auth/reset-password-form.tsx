@@ -24,14 +24,7 @@ import {
   CardTitle,
   CardFooter,
 } from "@/components/ui/card";
-import {
-  Eye,
-  EyeOff,
-  Loader2,
-  ChevronLeft,
-  ArrowLeft,
-  XCircle,
-} from "lucide-react";
+import { Eye, EyeOff, Loader2, ArrowLeft } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
