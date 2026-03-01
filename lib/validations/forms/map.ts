@@ -14,7 +14,7 @@ export const zoneSchema = z.object({
     .array(z.tuple([z.number(), z.number()]))
     .min(
       MIN_ZONE_POINTS,
-      `At least ${MIN_ZONE_POINTS} coordinates are required`
+      `At least ${MIN_ZONE_POINTS} coordinates are required`,
     ),
 });
 

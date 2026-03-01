@@ -30,7 +30,7 @@ export const studentUpdateSchema = studentUpdateInputSchema.transform(
           dateOfBirth: data.studentProfile.dateOfBirth?.toISOString(),
         }
       : undefined,
-  })
+  }),
 );
 
 export type StudentUpdateInputValues = z.infer<typeof studentUpdateInputSchema>;

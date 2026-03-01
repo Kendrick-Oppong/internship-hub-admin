@@ -9,7 +9,7 @@ export const internshipPeriodInputSchema = z
       .min(1, "This field is required")
       .refine(
         (val) => val.replace(/[^A-Za-z0-9]/g, "").length >= 3,
-        "Name must contain at least 3 letters"
+        "Name must contain at least 3 letters",
       ),
 
     startDate: z.date().optional(),
@@ -40,7 +40,7 @@ export const internshipPeriodInputSchema = z
     {
       message: "End date must be after start date",
       path: ["endDate"],
-    }
+    },
   );
 
 // Output schema (transforms Date objects to ISO strings)
@@ -49,7 +49,7 @@ export const internshipPeriodSchema = internshipPeriodInputSchema
     (data) => data.startDate instanceof Date && data.endDate instanceof Date,
     {
       message: "Both dates are required",
-    }
+    },
   )
   .transform((data) => ({
     ...data,
